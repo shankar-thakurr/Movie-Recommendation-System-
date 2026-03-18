@@ -4,7 +4,9 @@ import streamlit as st
 # =============================
 # CONFIG
 # =============================
-API_BASE = "https://movie-rec-466x.onrender.com" or "http://127.0.0.1:8000"
+# If you want to use the live Render API, uncomment the first line. For local testing, use localhost.
+# API_BASE = "https://movie-rec-466x.onrender.com"
+API_BASE = "http://127.0.0.1:8000"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 OMDB_API_KEY = st.secrets.get("OMDB_API_KEY", "YOUR_OMDB_API_KEY_HERE")
@@ -1032,16 +1034,16 @@ with st.sidebar:
     st.markdown("<div class='sidebar-divider'></div>", unsafe_allow_html=True)
     st.markdown("<div class='sidebar-label'>Home Feed Category</div>", unsafe_allow_html=True)
     home_category = st.selectbox(
-        "", ["trending", "popular", "top_rated", "now_playing", "upcoming"], index=0,
+        "Home Feed Category", ["trending", "popular", "top_rated", "now_playing", "upcoming"], index=0,
         label_visibility="collapsed"
     )
 
     st.markdown("<div class='sidebar-label' style='margin-top:1rem;'>Grid Columns</div>", unsafe_allow_html=True)
-    grid_cols = st.slider("", 4, 8, 6, label_visibility="collapsed")
+    grid_cols = st.slider("Grid Columns", 4, 8, 6, label_visibility="collapsed")
 
     st.markdown("<div class='sidebar-divider'></div>", unsafe_allow_html=True)
     st.markdown("<div class='sidebar-label'>🔑 OMDB API Key</div>", unsafe_allow_html=True)
-    user_key = st.text_input("", type="password", placeholder="omdbapi.com free key", label_visibility="collapsed")
+    user_key = st.text_input("OMDB API Key", type="password", placeholder="omdbapi.com free key", label_visibility="collapsed")
     if user_key:
         OMDB_API_KEY = user_key
     st.markdown("<div style='font-size:0.7rem;color:var(--text3);margin-top:4px;'>For IMDb/RT ratings on details page</div>", unsafe_allow_html=True)
@@ -1065,7 +1067,7 @@ if st.session_state.view == "home":
 
     # Search bar
     st.markdown("<div class='search-label'>🔍 &nbsp;Search by movie title</div>", unsafe_allow_html=True)
-    typed = st.text_input("", placeholder="e.g.  Inception,  The Dark Knight,  Interstellar...",
+    typed = st.text_input("Search movie", placeholder="e.g.  Inception,  The Dark Knight,  Interstellar...",
                           label_visibility="collapsed")
 
     if typed.strip():
